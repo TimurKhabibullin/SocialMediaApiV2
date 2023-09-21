@@ -6,11 +6,15 @@ import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.GenerationType;
 import jakarta.persistence.Id;
 import jakarta.persistence.Table;
+import lombok.AllArgsConstructor;
 import lombok.Data;
+import lombok.NoArgsConstructor;
 
 @Data
 @Entity
 @Table(name = "post")
+@NoArgsConstructor
+@AllArgsConstructor
 public class Post {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
@@ -26,16 +30,4 @@ public class Post {
     private long dateOfCreate;
     @Column(name = "person_id")
     private int person;
-
-    public Post() {
-    }
-
-    public Post(int id, String header, String text, String linkForImage, long dateOfCreate, int person) {
-        this.id = id;
-        this.header = header;
-        this.text = text;
-        this.linkForImage = linkForImage;
-        this.dateOfCreate = dateOfCreate;
-        this.person = person;
-    }
 }

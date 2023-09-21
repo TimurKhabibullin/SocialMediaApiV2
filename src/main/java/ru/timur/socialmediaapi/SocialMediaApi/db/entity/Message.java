@@ -6,11 +6,15 @@ import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.GenerationType;
 import jakarta.persistence.Id;
 import jakarta.persistence.Table;
+import lombok.AllArgsConstructor;
 import lombok.Data;
+import lombok.NoArgsConstructor;
 
 @Data
 @Entity
 @Table(name = "messages")
+@NoArgsConstructor
+@AllArgsConstructor
 public class Message {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
@@ -22,14 +26,4 @@ public class Message {
     private int recipient;
     @Column(name = "text")
     private String text;
-
-    public Message() {
-    }
-
-    public Message(int id, int sender, int recipient, String text) {
-        this.id = id;
-        this.sender = sender;
-        this.recipient = recipient;
-        this.text = text;
-    }
 }

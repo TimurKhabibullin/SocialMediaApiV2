@@ -6,11 +6,15 @@ import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.GenerationType;
 import jakarta.persistence.Id;
 import jakarta.persistence.Table;
+import lombok.AllArgsConstructor;
 import lombok.Data;
+import lombok.NoArgsConstructor;
 
 @Data
 @Entity
 @Table(name = "friend_requests")
+@NoArgsConstructor
+@AllArgsConstructor
 public class FriendRequest {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
@@ -23,13 +27,4 @@ public class FriendRequest {
     @Column(name = "status")
     private String status;
 
-    public FriendRequest() {
-    }
-
-    public FriendRequest(int id, int sender, int recipient, String status) {
-        this.id = id;
-        this.sender = sender;
-        this.recipient = recipient;
-        this.status = status;
-    }
 }

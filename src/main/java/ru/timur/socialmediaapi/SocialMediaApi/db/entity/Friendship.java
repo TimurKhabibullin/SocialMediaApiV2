@@ -6,11 +6,15 @@ import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.GenerationType;
 import jakarta.persistence.Id;
 import jakarta.persistence.Table;
+import lombok.AllArgsConstructor;
 import lombok.Data;
+import lombok.NoArgsConstructor;
 
 @Data
 @Entity
 @Table(name = "friendships")
+@NoArgsConstructor
+@AllArgsConstructor
 public class Friendship {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
@@ -20,13 +24,4 @@ public class Friendship {
     private int user1;
     @Column(name = "user2_id")
     private int user2;
-
-    public Friendship() {
-    }
-
-    public Friendship(int id, int user1, int user2) {
-        this.id = id;
-        this.user1 = user1;
-        this.user2 = user2;
-    }
 }
