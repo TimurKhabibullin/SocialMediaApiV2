@@ -55,7 +55,7 @@ public class AuthController {
         registrationService.register(personModel);
         personModel.setRole(PersonRole.ROLE_USER.toString());
         String token = jwtUtil.generateToken(personModel.getUsername());
-        return ResponseEntity.status(HttpStatus.OK).body(Map.of("jwt_token", token));
+        return ResponseEntity.status(HttpStatus.OK).body(Map.of("jwt-token", token));
     }
 
     @Operation(summary = "Авторизация")
