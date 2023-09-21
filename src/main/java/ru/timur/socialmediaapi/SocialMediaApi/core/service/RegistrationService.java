@@ -5,6 +5,7 @@ import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 import ru.timur.socialmediaapi.SocialMediaApi.adapter.PeopleRepositoryAdapter;
 import ru.timur.socialmediaapi.SocialMediaApi.core.model.PersonModel;
+import ru.timur.socialmediaapi.SocialMediaApi.core.model.PersonRole;
 
 @Service
 public class RegistrationService {
@@ -19,7 +20,7 @@ public class RegistrationService {
 
     @Transactional
     public void register(PersonModel personModel){
-        personModel.setRole("ROLE_USER");
+        personModel.setRole(PersonRole.ROLE_USER.toString());
         personModel.setPassword(passwordEncoder.encode(personModel.getPassword()));
         peopleRepositoryAdapter.save(personModel);
     }
