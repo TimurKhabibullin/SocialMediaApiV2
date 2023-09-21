@@ -18,6 +18,7 @@ import org.springframework.web.bind.annotation.RestController;
 import ru.timur.socialmediaapi.SocialMediaApi.api.dto.PersonDTO;
 import ru.timur.socialmediaapi.SocialMediaApi.api.dto.AuthenticationDTO;
 import ru.timur.socialmediaapi.SocialMediaApi.core.model.PersonModel;
+import ru.timur.socialmediaapi.SocialMediaApi.core.model.PersonRole;
 import ru.timur.socialmediaapi.SocialMediaApi.core.service.RegistrationService;
 import ru.timur.socialmediaapi.SocialMediaApi.config.security.JWTUtil;
 import ru.timur.socialmediaapi.SocialMediaApi.core.utils.PersonValidator;
@@ -52,7 +53,7 @@ public class AuthController {
         }
 
         registrationService.register(personModel);
-        personModel.setRole("ROLE_USER");
+        personModel.setRole(PersonRole.ROLE_USER.toString());
         String token = jwtUtil.generateToken(personModel.getUsername());
         return ResponseEntity.status(HttpStatus.OK).body(Map.of("jwt-token", token));
     }
