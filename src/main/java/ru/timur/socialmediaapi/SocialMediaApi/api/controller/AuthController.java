@@ -48,11 +48,9 @@ public class AuthController {
             for (FieldError error : bindingResult.getFieldErrors()) {
                 errors.put(error.getField(), error.getDefaultMessage());
             }
-
             return ResponseEntity.status(HttpStatus.BAD_REQUEST).body(errors);
         }
 
-        System.out.println(personModel);
         registrationService.register(personModel);
         personModel.setRole("ROLE_USER");
         String token = jwtUtil.generateToken(personModel.getUsername());

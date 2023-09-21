@@ -19,12 +19,20 @@ public class FriendRequestService {
     }
 
 
+    public FriendRequestModel sendFriendRequest(int senderId, int recipientId) {
+        FriendRequestModel friendRequestModel = new FriendRequestModel();
+        friendRequestModel.setSender(senderId);
+        friendRequestModel.setRecipient(recipientId);
+        friendRequestModel.setStatus(RequestStatusModel.PENDING.toString());
+        return friendRequestRepositoryAdapter.save(friendRequestModel);
+    }
+
     public FriendRequestModel sendFriendRequest(FriendRequestModel friendRequestModel) {
         friendRequestModel.setStatus(RequestStatusModel.PENDING.toString());
         return friendRequestRepositoryAdapter.save(friendRequestModel);
     }
 
-    public void acceptFriendRequest(int friendRequestId) {
+    public FriendRequestModel acceptFriendRequest(int friendRequestId) {
         FriendRequestModel friendRequestModel = friendRequestRepositoryAdapter.findById(friendRequestId);
 
         // Создание дружбы между пользователями
@@ -34,11 +42,14 @@ public class FriendRequestService {
         friendshipRepositoryAdapter.save(friendshipModel);
 
         friendRequestRepositoryAdapter.delete(friendRequestModel);
+
+        return friendRequestModel;
     }
 
-    public void rejectFriendRequest(int friendRequestId) {
+    public FriendRequestModel rejectFriendRequest(int friendRequestId) {
         FriendRequestModel friendRequestModel = friendRequestRepositoryAdapter.findById(friendRequestId);
         friendRequestModel.setStatus(RequestStatusModel.REJECTED.toString());
+        return friendRequestModel;
     }
 
     public FriendRequestModel getFriendRequestById(int requestId) {
@@ -49,7 +60,8 @@ public class FriendRequestService {
         return friendRequestRepositoryAdapter.findBySender(senderId);
     }
 
-    public void remove(FriendRequestModel friendRequestModel){
+    public FriendRequestModel remove(FriendRequestModel friendRequestModel){
         friendRequestRepositoryAdapter.delete(friendRequestModel);
+        return friendRequestModel;
     }
 }
